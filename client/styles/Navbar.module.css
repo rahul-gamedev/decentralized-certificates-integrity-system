@@ -16,8 +16,13 @@
     width: auto;
     height: auto;     
     margin: auto 0;
-}
 
+    transition: all 0.2s ease-out;
+}
+.icon:hover
+{
+    opacity: 0.85;
+}
 .links
 {
     list-style: none;
@@ -33,4 +38,5 @@
 .connect
 {
     height: min-content;
+    margin-left: 14px;
 }

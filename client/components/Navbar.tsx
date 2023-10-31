@@ -2,13 +2,8 @@ import React from 'react'
 import icon from '../public/favicon.png'
 import Image from 'next/image'
 import styles from '../styles/Navbar.module.css'
-import { ConnectWallet, darkTheme, lightTheme } from "@thirdweb-dev/react";
+import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import Link from 'next/link';
-
-//Pages
-import Home from '../pages';
-import CertificateIssue from '../pages/certificate';
-import VerifyCertificate from '../pages/verify';
 
 const Navbar = () => {
   const customTheme = darkTheme({
