@@ -1,24 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import styles from '../../styles/app.module.css'
+import { useAddress, useContract, useContractRead } from '@thirdweb-dev/react';
 
 const VerifyCertificate = () => {
 
-  const Verify = () =>{
 
+  const {contract} = useContract('0x9Ee2291c4DedCC11c2c170f601EeC8D78C726bcD');
+  const address = useAddress();
+
+  const [Loading, setLoading] = useState(false);
+
+
+  const [hash, setHash] = useState('');
+  const [verified, setVerified] = useState(Boolean);
+  const [result, setResult] = useState([]);
+
+
+  const Verify = async (hash : string) => {
+    try {
+      setLoading(true);
+      const data = await contract?.call("VerifyCertificate", [hash]);
+      setVerified(data[0]);
+      setResult(data[1]);
+      setLoading(false);
+      console.log(data[0]);
+         
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    } 
+ }  
+  const handleClick = (e:any) =>{
+    e.preventDefault();
+    Verify(hash);
   }
 
   return (
-    <div className={styles.container}>
-      <Navbar></Navbar>
-      <form className={styles.form} action={Verify}>
-          <h1 className={styles.title}>Verify Certificate</h1>
-          <label>ID*</label>
-          <input type='text' name='id'/>
-          <button className={styles.button}>Verify</button>
-        </form>
-    
-    </div>
+      <div>
+        {Loading && <div className={styles.loading}><h1>Loading...</h1></div>}
+        <div className={styles.container}>
+          <Navbar></Navbar>
+          <form className={styles.form}>
+              <h1 className={styles.title}>Verify Certificate</h1>
+              <label>ID*</label>
+              <input type='text' name='id' onChange={(e)=>{
+                setHash(e.target.value);
+              }}/>
+              <button className={styles.button} onClick={handleClick}>Verify</button>
+          </form>
+
+          {verified && <div className={styles.form}>
+              <h1 className={styles.title}>Result</h1>
+
+              <label>Is Verified</label>
+              <p>{verified.toString()}</p>
+              <label>Hash</label>
+              <p>{result[2]}</p>
+
+              <label>Address</label>
+              <p>{result[0]}</p>
+
+              <label>Name</label>
+              <p>{result[5]}</p>
+
+              <label>Certificate Title</label>
+              <p>{result[3]}</p>
+
+              <label>Certificate Description</label>
+              <p>{result[4]}</p>
+
+          </div>
+          }
+
+          {!verified && <div className={styles.form}>
+              <h1 className={styles.title}>Result</h1>
+
+              <label>Is Verified</label>
+              <p>{verified.toString()}</p>
+
+          </div>
+          }
+          
+        </div>
+      </div>
   )
 }
 

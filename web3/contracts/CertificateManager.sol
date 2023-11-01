@@ -5,25 +5,38 @@ contract CertificateManager {
 
     struct Certificate
     {
-        uint256 id;
+        address recipient;
+        uint256 key;
+        bytes32 id;
         string title;
         string description;
         string recipientName;
-        uint dateOfIssue;
     }
 
     uint256 certificateCount = 0;
 
-    mapping(uint256 => Certificate) Certificates;
+    mapping(bytes32 => Certificate) Certificates;
 
-    function IssueCertificate (string memory _title, string memory _description, string memory _recipientName, uint _dateOfIsse)  public
+    event CertificateIssued(bytes32 hash);
+
+    function IssueCertificate (address _address, string memory _title, string memory _description, string memory _recipientName)  public returns (bytes32)
     {
         certificateCount++;
-        Certificates[certificateCount] = Certificate(certificateCount, _title, _description, _recipientName, _dateOfIsse);
+        bytes32 hash = sha256(abi.encodePacked(certificateCount));
+        Certificates[hash] = Certificate(_address, certificateCount, hash, _title, _description, _recipientName);
+        emit CertificateIssued(hash);
+        return hash;
     }
 
-    function VerifyCertificate (uint256 _id) public view returns(Certificate memory)
+    function VerifyCertificate (bytes32 hash) public view returns(bool isVerified, Certificate memory)
     {
-        return Certificates[_id];
+        if(Certificates[hash].id > 0)
+        {
+            return (true, Certificates[hash]);
+        }
+        else
+        {
+            return (false, Certificates[hash]);
+        }
     }
 }

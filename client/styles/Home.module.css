@@ -57,3 +57,9 @@
   background-color: #00465f;
   font-size: 13px;
 }
+
+.connect
+{
+    height: min-content;
+    margin-left: 14px;
+}

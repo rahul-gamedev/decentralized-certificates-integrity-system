@@ -23,6 +23,7 @@ a:hover {
 
 * {
   box-sizing: border-box;
+  border: 0;
 }
 
 body {
@@ -35,7 +36,7 @@ input
   margin-top: 8px;
   margin-bottom: 18px;
   border: none;
-  padding: 14px 18px;
+  padding: 18px;
   border-radius: 8px;
 }
 
@@ -43,5 +44,6 @@ label
 {
   font-family: inherit;
   font-weight: 600;
+  margin-bottom: 0px;
 }
 
