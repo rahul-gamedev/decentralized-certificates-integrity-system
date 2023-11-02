@@ -10,10 +10,10 @@ const activeChain = "goerli";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider
-      clientId='484fd8e9bbd0e70c590632c5597069cd'
+      clientId="484fd8e9bbd0e70c590632c5597069cd"
       activeChain={activeChain}
     >
-        <Component {...pageProps} />
+      <Component {...pageProps} />
     </ThirdwebProvider>
   );
 }
