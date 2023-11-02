@@ -41,3 +41,17 @@
     height: min-content;
     margin-left: 14px;
 }
+
+@media (max-width: 600px) {
+
+    .icon
+    {
+        max-width: 50px;
+    }
+
+    .links
+    {
+        font-size: 12px;
+    }
+    
+}
