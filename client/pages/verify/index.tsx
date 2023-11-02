@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import styles from '../../styles/app.module.css'
 import { useAddress, useContract, useContractRead } from '@thirdweb-dev/react';
+import { contractID } from '../../context/context';
 
 const VerifyCertificate = () => {
 
 
-  const {contract} = useContract('0x9Ee2291c4DedCC11c2c170f601EeC8D78C726bcD');
+  const {contract} = useContract(contractID);
   const address = useAddress();
 
   const [Loading, setLoading] = useState(false);

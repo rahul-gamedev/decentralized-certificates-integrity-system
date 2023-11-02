@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import styles from '../../styles/app.module.css'
 
-import { useStateContext } from '../../context'
 import { useContract, useContractWrite , useAddress} from '@thirdweb-dev/react'
-
+import {contractID} from '../../context/context'
 
 const CertificateIssue = () => {
 
@@ -12,7 +11,7 @@ const CertificateIssue = () => {
 
   const [result, setResult] = useState("");
 
-  const {contract} = useContract('0x9Ee2291c4DedCC11c2c170f601EeC8D78C726bcD');
+  const {contract} = useContract(contractID);
   const { mutateAsync: IssueCertificate } = useContractWrite(contract, 'IssueCertificate');
   const address = useAddress();
 

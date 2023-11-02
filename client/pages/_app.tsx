@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "../styles/globals.css";
-import { StateContextProvider } from "../context";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -14,9 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       clientId='484fd8e9bbd0e70c590632c5597069cd'
       activeChain={activeChain}
     >
-      <StateContextProvider>
         <Component {...pageProps} />
-      </StateContextProvider>
     </ThirdwebProvider>
   );
 }

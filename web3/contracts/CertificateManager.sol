@@ -13,9 +13,21 @@ contract CertificateManager {
         string recipientName;
     }
 
-    uint256 certificateCount = 0;
+    struct Organization
+    {
+        address owner;
+        string name;
+        string typeOfOrganization;
+        string website;
+        string email;
+    }
 
+
+    uint256 certificateCount = 0;
     mapping(bytes32 => Certificate) Certificates;
+ 
+    mapping(address => Organization) Organizations;
+    mapping(address => bool) IsOrganizations;
 
     event CertificateIssued(bytes32 hash);
 
@@ -38,5 +50,16 @@ contract CertificateManager {
         {
             return (false, Certificates[hash]);
         }
+    }
+
+    function CreateOrganization(address _owner, string memory _name, string memory _typeOfOrganization, string memory _website, string memory _email) public
+    {
+        Organizations[_owner] = Organization(_owner, _name, _typeOfOrganization, _website, _email);
+        IsOrganizations[_owner] = true;
+    }
+
+    function isOrganization(address _address) public view returns(bool)
+    {
+        return IsOrganizations[_address]; 
     }
 }

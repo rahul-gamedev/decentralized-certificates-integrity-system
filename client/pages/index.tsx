@@ -2,7 +2,9 @@ import styles from "../styles/Home.module.css";
 import { NextPage } from "next";
 import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
-import { ConnectWallet, darkTheme, useAddress } from "@thirdweb-dev/react";
+import { ConnectWallet, darkTheme, useAddress, useContract } from "@thirdweb-dev/react";
+import { contractID } from "../context/context";
+import { useEffect, useState } from "react";
 
 
 const Home: NextPage = () => {
@@ -18,11 +20,32 @@ const Home: NextPage = () => {
 
   const router = useRouter();
 
+  const address = useAddress();
+
+  const {contract} = useContract(contractID);
+  const [IsOrganization, setIsOrganization] = useState();
+
+
+  useEffect(() => {
+    const getOrganization = async () =>{
+      try
+      {
+        const data = await contract?.call("isOrganization", [address]);
+        setIsOrganization(data);
+      }
+      catch(error)
+      {
+        console.log(error);
+      }
+    }
+    getOrganization();
+  }, [[], address, IsOrganization])
+
+  
   const HandleClick = () =>{
     router.push("/create-organization");
   }
 
-  const address = useAddress();
   
   return (
     <main className={styles.main}>
@@ -32,7 +55,7 @@ const Home: NextPage = () => {
           <h1 className={styles.title}>Decentralized Certificates Integrity System</h1>
           <p className={styles.p}>A Decentralized and Secured Way To Issue & Verify Certificates.</p>
         
-          {address ? <button className={styles.button} onClick={HandleClick} >Create Organization</button> : <div className={styles.connect}><ConnectWallet  modalSize='compact' theme={btnTheme}></ConnectWallet></div>}
+          {address ? <div>{!IsOrganization && <button className={styles.button} onClick={HandleClick} >Create Organization</button>}</div> : <div className={styles.connect}><ConnectWallet  modalSize='compact' theme={btnTheme}></ConnectWallet></div>}
           
         </div>
       </div>
