@@ -65,7 +65,7 @@ const CertificateIssue = () => {
             setFormData({...formData, description: e.target.value})
           }}/>
 
-          <label>Recipient's Name*</label>
+          <label>Recipient Name*</label>
           <input required name='name' onChange={(e)=>{
             setFormData({...formData, recipientName: e.target.value})
           }} />
