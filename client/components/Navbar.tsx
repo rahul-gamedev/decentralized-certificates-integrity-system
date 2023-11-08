@@ -41,7 +41,7 @@ const Navbar = () => {
       <Link href='/' className={styles.icon}><Image className={styles.icon} src={icon} alt='Logo'></Image></Link>
       <ul className={styles.links}>
         <li><Link href='/verify'>Verify</Link></li>
-        {address <li><Link href='/certificate'>Issue Certificate</Link></li>}
+        {address && <li><Link href='/certificate'>Issue Certificate</Link></li>}
         {address && <div className={styles.connect}><ConnectWallet  modalSize='compact' theme={customTheme}></ConnectWallet></div>}
       
       </ul>
