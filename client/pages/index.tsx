@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       }
     };
     getOrganization();
-  }, []);
+  }, [[], address, IsOrganization]);
 
   const HandleClick = () => {
     router.push("/create-organization");
