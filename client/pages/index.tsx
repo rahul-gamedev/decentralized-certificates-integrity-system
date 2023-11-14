@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         console.log(error);
       }
     };
-    getOrganization();
+    if (!IsOrganization && address) getOrganization();
   }, [[], address, IsOrganization]);
 
   const HandleClick = () => {
