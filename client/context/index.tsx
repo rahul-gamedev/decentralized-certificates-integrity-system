@@ -26,7 +26,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
     "0xE57c3C0b215e674c2fAD9AD857b8f09D48F30D59"
   );
 
-  const _address: string | undefined = useAddress();
+  const _address = useAddress();
   const [IsOrganization, setIsOrganization] = useState(false);
   const [Loading, setLoading] = useState(false);
 
@@ -40,21 +40,22 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const getOrganization = async () => {
       try {
-        setLoading(true);
-        console.log(contract);
-        if (contract) {
+        if (contract && _address) {
+          setLoading(true);
+          console.log(contract);
           const data = await contract.call("isOrganization", [_address]);
           setIsOrganization(data);
+          console.log("data stored");
+
+          setLoading(false);
         }
-        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
-    if (!IsOrganization) {
-      getOrganization();
-    }
+    // if (!IsOrganization)
+    getOrganization();
 
     setAuth({
       address: _address,

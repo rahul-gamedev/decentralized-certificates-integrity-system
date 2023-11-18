@@ -11,10 +11,10 @@ const CertificateIssue = () => {
 
   const [result, setResult] = useState("");
 
-  const { address, contract, IsOrg, loading } = useAuthContext();
+  const { address, Contract, IsOrg, loading } = useAuthContext();
 
   const { mutateAsync: IssueCertificate } = useContractWrite(
-    contract,
+    Contract,
     "IssueCertificate"
   );
 
@@ -48,7 +48,7 @@ const CertificateIssue = () => {
 
   return (
     <div>
-      {Loading || (loading && <Loader props={"Certificate"} />)}
+      {(Loading || loading) && <Loader props={"Certificate"} />}
 
       <div className={styles.container}>
         <Navbar></Navbar>

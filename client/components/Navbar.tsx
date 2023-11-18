@@ -14,7 +14,7 @@ const Navbar = () => {
       primaryButtonText: "#ffffff",
     },
   });
-  const { address, contract, IsOrg, loading } = useAuthContext();
+  const { address, IsOrg } = useAuthContext();
 
   return (
     <div className={styles.container}>

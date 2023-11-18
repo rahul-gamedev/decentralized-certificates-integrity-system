@@ -6,7 +6,7 @@ import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
 
 const VerifyCertificate = () => {
-  const { address, contract, IsOrg, loading } = useAuthContext();
+  const { address, Contract, IsOrg, loading } = useAuthContext();
 
   const [Loading, setLoading] = useState(false);
 
@@ -17,7 +17,7 @@ const VerifyCertificate = () => {
   const Verify = async (hash: string) => {
     try {
       setLoading(true);
-      const data = await contract?.call("VerifyCertificate", [hash]);
+      const data = await Contract?.call("VerifyCertificate", [hash]);
       setVerified(data[0]);
       setResult(data[1]);
       setLoading(false);

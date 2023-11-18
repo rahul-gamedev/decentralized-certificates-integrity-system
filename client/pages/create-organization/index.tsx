@@ -37,22 +37,24 @@ const CreateOrganization = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      throw new Error("Error");
+
       console.log(error);
     }
   };
 
   const HandleAction = (e: any) => {
-    e.preventDefaults();
+    e.preventDefault();
     PublishOrganization({ ...formData });
   };
 
   useEffect(() => {
     if (IsOrg) router.push("/");
-  }, []);
+  }, [IsOrg]);
 
   return (
     <div>
-      {Loading && <Loader props={"Create Organization"} />}
+      {(Loading || loading) && <Loader props={"Create Organization"} />}
 
       <div className={styles.container}>
         <Navbar></Navbar>
@@ -62,6 +64,7 @@ const CreateOrganization = () => {
           <input
             type="text"
             name="Name"
+            required
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value });
             }}
@@ -71,6 +74,7 @@ const CreateOrganization = () => {
           <input
             type="text"
             name="type"
+            required
             onChange={(e) => {
               setFormData({ ...formData, type: e.target.value });
             }}
@@ -80,6 +84,7 @@ const CreateOrganization = () => {
           <input
             type="text"
             name="website"
+            required
             onChange={(e) => {
               setFormData({ ...formData, website: e.target.value });
             }}
@@ -89,6 +94,7 @@ const CreateOrganization = () => {
           <input
             type="email"
             name="email"
+            required
             onChange={(e) => {
               setFormData({ ...formData, email: e.target.value });
             }}
