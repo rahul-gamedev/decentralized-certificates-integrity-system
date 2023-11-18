@@ -1,4 +1,9 @@
-import { SmartContract, useAddress, useContract } from "@thirdweb-dev/react";
+import {
+  SmartContract,
+  useAddress,
+  useContract,
+  useSwitchAccount,
+} from "@thirdweb-dev/react";
 import {
   ReactNode,
   createContext,
@@ -9,7 +14,7 @@ import {
 
 export interface Auth {
   address: string | undefined;
-  contract: SmartContract | undefined;
+  Contract: SmartContract | undefined;
   IsOrg: boolean;
   loading: boolean;
 }
@@ -17,16 +22,17 @@ export interface Auth {
 export const AuthContext = createContext<Auth | undefined>(undefined);
 
 export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
-  const _address: string | undefined = useAddress();
-  const _contract = useContract(
-    "0xe57c3c0b215e674c2fad9ad857b8f09d48f30d59"
-  ).contract;
+  const { contract } = useContract(
+    "0xE57c3C0b215e674c2fAD9AD857b8f09D48F30D59"
+  );
 
+  const _address: string | undefined = useAddress();
   const [IsOrganization, setIsOrganization] = useState(false);
   const [Loading, setLoading] = useState(false);
+
   const [auth, setAuth] = useState<Auth>({
-    address: "",
-    contract: _contract,
+    address: _address,
+    Contract: contract,
     IsOrg: false,
     loading: false,
   });
@@ -35,23 +41,28 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
     const getOrganization = async () => {
       try {
         setLoading(true);
-        const data = await _contract?.call("isOrganization", [_address]);
-        setIsOrganization(data);
+        console.log(contract);
+        if (contract) {
+          const data = await contract.call("isOrganization", [_address]);
+          setIsOrganization(data);
+        }
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
-    getOrganization();
+    if (!IsOrganization) {
+      getOrganization();
+    }
 
     setAuth({
       address: _address,
-      contract: _contract,
+      Contract: contract,
       IsOrg: IsOrganization,
       loading: Loading,
     });
-  }, [_address, IsOrganization]);
+  }, [_address, IsOrganization, contract]);
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };

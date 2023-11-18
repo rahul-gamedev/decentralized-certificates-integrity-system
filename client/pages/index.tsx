@@ -17,7 +17,7 @@ const Home: NextPage = () => {
 
   const router = useRouter();
 
-  const { address, contract, IsOrg, loading } = useAuthContext();
+  const { address, IsOrg, loading } = useAuthContext();
 
   const HandleClick = () => {
     router.push("/create-organization");

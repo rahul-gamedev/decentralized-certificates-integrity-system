@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/app.module.css";
 import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
+import { useRouter } from "next/router";
 
 const CreateOrganization = () => {
-  const { address, contract, IsOrg, loading } = useAuthContext();
+  const { address, Contract, IsOrg, loading } = useAuthContext();
 
   const { mutateAsync: CreateOrganization } = useContractWrite(
-    contract,
+    Contract,
     "CreateOrganization"
   );
 
@@ -22,8 +23,12 @@ const CreateOrganization = () => {
     email: "",
   });
 
+  const router = useRouter();
+
   const PublishOrganization = async (form: any) => {
     try {
+      console.log("Publishing...");
+
       setLoading(true);
       const data = await CreateOrganization({
         args: [address, form.name, form.type, form.website, form.email],
@@ -41,9 +46,13 @@ const CreateOrganization = () => {
     PublishOrganization({ ...formData });
   };
 
+  useEffect(() => {
+    if (IsOrg) router.push("/");
+  }, []);
+
   return (
     <div>
-      {Loading || (loading && <Loader props={"Create Organization"} />)}
+      {Loading && <Loader props={"Create Organization"} />}
 
       <div className={styles.container}>
         <Navbar></Navbar>
