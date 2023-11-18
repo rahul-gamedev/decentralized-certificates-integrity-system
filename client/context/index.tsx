@@ -16,7 +16,7 @@ export interface Auth {
 
 export const AuthContext = createContext<Auth | undefined>(undefined);
 
-export const AuthStateProvider = ({ children }) => {
+export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
   const _address: string | undefined = useAddress();
   const _contract = useContract(
     "0xe57c3c0b215e674c2fad9ad857b8f09d48f30d59"
