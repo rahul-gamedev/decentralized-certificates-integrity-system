@@ -45,8 +45,6 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
           console.log(contract);
           const data = await contract.call("isOrganization", [_address]);
           setIsOrganization(data);
-          console.log("data stored");
-
           setLoading(false);
         }
       } catch (error) {
@@ -54,8 +52,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    // if (!IsOrganization)
-    getOrganization();
+    if (!IsOrganization) getOrganization();
 
     setAuth({
       address: _address,

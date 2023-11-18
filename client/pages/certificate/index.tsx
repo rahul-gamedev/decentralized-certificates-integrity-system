@@ -5,6 +5,7 @@ import styles from "../../styles/app.module.css";
 import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
+import QRCode from "react-qr-code";
 
 const CertificateIssue = () => {
   const [Loading, setLoading] = useState(false);
@@ -89,6 +90,18 @@ const CertificateIssue = () => {
         {result && (
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
+            {/* <QRCode
+              value={`http://localhost:3000/verify/${result}`}
+              bgColor="rgb(220, 227, 231)"
+            ></QRCode> */}
+
+            <img
+              src={`https://api.qrserver.com/v1/create-qr-code/?data=https://dcis.vercel.app/verify/${result}&size=256x256&bgcolor=220-227-231`}
+              alt=""
+              title="qrcode"
+              style={{ height: "256px", width: "256px" }}
+            />
+            <br></br>
             <label>Hash</label>
             <p>{result}</p>
           </div>
