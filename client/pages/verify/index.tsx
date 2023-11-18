@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/app.module.css";
 import { useAddress, useContract } from "@thirdweb-dev/react";
-import { contractID } from "../../context/context";
 import Loader from "../../components/Loader";
+import { useAuthContext } from "../../context";
 
 const VerifyCertificate = () => {
-  const { contract } = useContract(contractID);
-  const address = useAddress();
+  const { address, contract, IsOrg, loading } = useAuthContext();
 
   const [Loading, setLoading] = useState(false);
 
@@ -35,7 +34,7 @@ const VerifyCertificate = () => {
 
   return (
     <div>
-      {Loading && <Loader />}
+      {Loading || (loading && <Loader />)}
 
       <div className={styles.container}>
         <Navbar></Navbar>

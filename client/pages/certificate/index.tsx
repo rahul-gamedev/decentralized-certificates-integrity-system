@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/app.module.css";
 
-import { useContract, useContractWrite, useAddress } from "@thirdweb-dev/react";
-import { contractID } from "../../context/context";
+import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
+import { useAuthContext } from "../../context";
 
 const CertificateIssue = () => {
   const [Loading, setLoading] = useState(false);
 
   const [result, setResult] = useState("");
 
-  const { contract } = useContract(contractID);
+  const { address, contract, IsOrg, loading } = useAuthContext();
+
   const { mutateAsync: IssueCertificate } = useContractWrite(
     contract,
     "IssueCertificate"
   );
-  const address = useAddress();
 
   const PublishCertificate = async (form: any) => {
     try {
@@ -48,7 +48,7 @@ const CertificateIssue = () => {
 
   return (
     <div>
-      {Loading && <Loader />}
+      {Loading || (loading && <Loader />)}
 
       <div className={styles.container}>
         <Navbar></Navbar>

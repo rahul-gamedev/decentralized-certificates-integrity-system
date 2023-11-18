@@ -2,15 +2,9 @@ import styles from "../styles/Home.module.css";
 import { NextPage } from "next";
 import Navbar from "../components/Navbar";
 import { useRouter } from "next/router";
-import {
-  ConnectWallet,
-  darkTheme,
-  useAddress,
-  useContract,
-} from "@thirdweb-dev/react";
-import { contractID } from "../context/context";
-import { useEffect, useState } from "react";
+import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import Loader from "../components/Loader";
+import { useAuthContext } from "../context";
 
 const Home: NextPage = () => {
   const btnTheme = darkTheme({
@@ -23,25 +17,7 @@ const Home: NextPage = () => {
 
   const router = useRouter();
 
-  const address = useAddress();
-
-  const { contract } = useContract(contractID);
-  const [IsOrganization, setIsOrganization] = useState(false);
-  const [Loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getOrganization = async () => {
-      try {
-        setLoading(true);
-        const data = await contract?.call("isOrganization", [address]);
-        setIsOrganization(data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!IsOrganization && address) getOrganization();
-  }, [[], address, IsOrganization]);
+  const { address, contract, IsOrg, loading } = useAuthContext();
 
   const HandleClick = () => {
     router.push("/create-organization");
@@ -52,7 +28,7 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <Navbar></Navbar>
         <div className={styles.app}>
-          {Loading && <Loader />}
+          {loading && <Loader />}
           <h1 className={styles.title}>
             Decentralized Certificates Integrity System
           </h1>
@@ -62,7 +38,7 @@ const Home: NextPage = () => {
 
           {address ? (
             <div>
-              {!IsOrganization && (
+              {!IsOrg && (
                 <button className={styles.button} onClick={HandleClick}>
                   Create Organization
                 </button>

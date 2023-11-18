@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/app.module.css";
-import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
-import { contractID } from "../../context/context";
+import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
+import { useAuthContext } from "../../context";
 
 const CreateOrganization = () => {
-  const { contract } = useContract(contractID);
+  const { address, contract, IsOrg, loading } = useAuthContext();
+
   const { mutateAsync: CreateOrganization } = useContractWrite(
     contract,
     "CreateOrganization"
   );
-  const address = useAddress();
 
   const [Loading, setLoading] = useState(false);
 
@@ -28,6 +28,7 @@ const CreateOrganization = () => {
       const data = await CreateOrganization({
         args: [address, form.name, form.type, form.website, form.email],
       });
+      console.log(data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -42,7 +43,7 @@ const CreateOrganization = () => {
 
   return (
     <div>
-      {Loading && <Loader />}
+      {Loading || (loading && <Loader />)}
 
       <div className={styles.container}>
         <Navbar></Navbar>
