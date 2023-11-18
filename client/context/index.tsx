@@ -51,7 +51,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
       IsOrg: IsOrganization,
       loading: !IsOrganization,
     });
-  }, [_address, IsOrganization]);
+  }, [_address, IsOrganization, []]);
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
