@@ -48,7 +48,7 @@ const CertificateIssue = () => {
 
   return (
     <div>
-      {Loading || (loading && <Loader />)}
+      {Loading || (loading && <Loader props={"Certificate"} />)}
 
       <div className={styles.container}>
         <Navbar></Navbar>

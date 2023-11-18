@@ -28,7 +28,7 @@ const Home: NextPage = () => {
       <div className={styles.container}>
         <Navbar></Navbar>
         <div className={styles.app}>
-          {loading && <Loader />}
+          {loading && <Loader props={"Home Page"} />}
           <h1 className={styles.title}>
             Decentralized Certificates Integrity System
           </h1>

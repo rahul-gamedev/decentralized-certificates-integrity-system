@@ -28,7 +28,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
     address: "",
     contract: _contract,
     IsOrg: false,
-    loading: true,
+    loading: false,
   });
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
       address: _address,
       contract: _contract,
       IsOrg: IsOrganization,
-      loading: Loading,
+      loading: !IsOrganization,
     });
   }, [_address, IsOrganization]);
 

@@ -43,7 +43,7 @@ const CreateOrganization = () => {
 
   return (
     <div>
-      {Loading || (loading && <Loader />)}
+      {Loading || (loading && <Loader props={"Create Organization"} />)}
 
       <div className={styles.container}>
         <Navbar></Navbar>

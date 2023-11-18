@@ -4,7 +4,9 @@ import Lottie from "react-lottie-player";
 
 import loadingAnim from "../public/loadingAnim.json";
 
-const Loader = () => {
+const Loader = ({ props }: any) => {
+  console.log(props);
+
   return (
     <div className={styles.loading}>
       <Lottie
