@@ -5,7 +5,6 @@ import styles from "../../styles/app.module.css";
 import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
-import QRCode from "react-qr-code";
 
 const CertificateIssue = () => {
   const [Loading, setLoading] = useState(false);
