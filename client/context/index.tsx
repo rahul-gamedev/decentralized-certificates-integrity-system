@@ -49,7 +49,7 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
       address: _address,
       contract: _contract,
       IsOrg: IsOrganization,
-      loading: !IsOrganization,
+      loading: !IsOrganization && _address != null,
     });
   }, [_address, IsOrganization, []]);
 
