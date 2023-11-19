@@ -39,9 +39,9 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const getOrganization = async () => {
-      setLoading(true);
       try {
         if (contract && _address) {
+          setLoading(true);
           console.log(contract);
           const data = await contract.call("isOrganization", [_address]);
           setIsOrganization(data);
