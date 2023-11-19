@@ -5,13 +5,14 @@ import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
 import { useRouter } from "next/router";
 import { FaCheckCircle } from "react-icons/fa";
+import { IoCloseCircle } from "react-icons/io5";
 
 const VerifyCertificate = () => {
   const router = useRouter();
 
   const hash = router.query.hashId;
 
-  const { address, Contract, IsOrg, loading } = useAuthContext();
+  const { Contract, loading } = useAuthContext();
 
   const [Loading, setLoading] = useState(false);
 
@@ -19,8 +20,8 @@ const VerifyCertificate = () => {
   const [result, setResult] = useState([]);
 
   const Verify = async (hash: string | string[] | undefined) => {
+    setLoading(true);
     try {
-      setLoading(true);
       const data = await Contract?.call("VerifyCertificate", [hash]);
       setVerified(data[0]);
       setResult(data[1]);
@@ -72,8 +73,10 @@ const VerifyCertificate = () => {
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
 
-            <label>Is Verified</label>
-            <p>{verified.toString()}</p>
+            <label>
+              Verification Status:{" "}
+              {verified && <IoCloseCircle style={{ color: "red" }} />}
+            </label>
           </div>
         )}
       </div>
