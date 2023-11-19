@@ -93,3 +93,33 @@
     word-wrap: break-word;
   }
 }
+
+@media (max-width: 380px) {
+  .title {
+    font-size: 21px;
+    width: 300px;
+    text-align: center;
+  }
+
+  .p {
+    font-size: 12px;
+    width: 250px;
+    text-align: center;
+    word-wrap: break-word;
+  }
+}
+
+@media (max-width: 300px) {
+  .title {
+    font-size: 18px;
+    width: 250px;
+    text-align: center;
+  }
+
+  .p {
+    font-size: 10px;
+    width: 250px;
+    text-align: center;
+    word-wrap: break-word;
+  }
+}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import styles from "../../styles/app.module.css";
-import { useAddress, useContract } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
 import { useRouter } from "next/router";
+import { FaCheckCircle } from "react-icons/fa";
 
 const VerifyCertificate = () => {
   const router = useRouter();
@@ -46,14 +46,11 @@ const VerifyCertificate = () => {
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
 
-            <label>Is Verified</label>
-            <p>{verified.toString()}</p>
-            <label>Hash</label>
-            <p>{result[2]}</p>
-
-            <label>Address</label>
-            <p>{result[0]}</p>
-
+            <label>
+              Verification Status:{" "}
+              {verified && <FaCheckCircle style={{ color: "green" }} />}
+            </label>
+            <br />
             <label>Name</label>
             <p>{result[5]}</p>
 
@@ -62,6 +59,12 @@ const VerifyCertificate = () => {
 
             <label>Certificate Description</label>
             <p>{result[4]}</p>
+
+            <label>Hash</label>
+            <p>{result[2]}</p>
+
+            <label>Issuer's Address</label>
+            <p>{result[0]}</p>
           </div>
         )}
 

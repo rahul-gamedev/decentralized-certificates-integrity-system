@@ -16,7 +16,7 @@ export interface Auth {
   address: string | undefined;
   Contract: SmartContract | undefined;
   IsOrg: boolean;
-  loading: boolean;
+  loading: boolean | undefined;
 }
 
 export const AuthContext = createContext<Auth | undefined>(undefined);
@@ -28,20 +28,20 @@ export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
 
   const _address = useAddress();
   const [IsOrganization, setIsOrganization] = useState(false);
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState<boolean>();
 
   const [auth, setAuth] = useState<Auth>({
     address: _address,
     Contract: contract,
     IsOrg: false,
-    loading: false,
+    loading: true,
   });
 
   useEffect(() => {
     const getOrganization = async () => {
+      setLoading(true);
       try {
         if (contract && _address) {
-          setLoading(true);
           console.log(contract);
           const data = await contract.call("isOrganization", [_address]);
           setIsOrganization(data);

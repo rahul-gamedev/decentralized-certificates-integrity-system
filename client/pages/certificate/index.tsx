@@ -89,10 +89,6 @@ const CertificateIssue = () => {
         {result && (
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
-            {/* <QRCode
-              value={`http://localhost:3000/verify/${result}`}
-              bgColor="rgb(220, 227, 231)"
-            ></QRCode> */}
 
             <img
               src={`https://api.qrserver.com/v1/create-qr-code/?data=https://dcis.vercel.app/verify/${result}&size=256x256&bgcolor=220-227-231`}
