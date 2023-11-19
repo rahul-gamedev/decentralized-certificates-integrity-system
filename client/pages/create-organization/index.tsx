@@ -48,10 +48,6 @@ const CreateOrganization = () => {
     PublishOrganization({ ...formData });
   };
 
-  useEffect(() => {
-    if (IsOrg) router.push("/");
-  }, [IsOrg]);
-
   return (
     <div>
       {(Loading || loading) && <Loader props={"Create Organization"} />}

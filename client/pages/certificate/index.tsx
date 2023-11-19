@@ -5,6 +5,7 @@ import styles from "../../styles/app.module.css";
 import { useContractWrite } from "@thirdweb-dev/react";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context";
+import Image from "next/image";
 
 const CertificateIssue = () => {
   const [Loading, setLoading] = useState(false);
@@ -90,7 +91,7 @@ const CertificateIssue = () => {
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
 
-            <img
+            <Image
               src={`https://api.qrserver.com/v1/create-qr-code/?data=https://dcis.vercel.app/verify/${result}&size=256x256&bgcolor=220-227-231`}
               alt=""
               title="qrcode"

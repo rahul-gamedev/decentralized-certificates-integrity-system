@@ -63,7 +63,7 @@ const VerifyCertificate = () => {
             <label>Hash</label>
             <p>{result[2]}</p>
 
-            <label>Issuer's Address</label>
+            <label>Issuer Address</label>
             <p>{result[0]}</p>
           </div>
         )}
