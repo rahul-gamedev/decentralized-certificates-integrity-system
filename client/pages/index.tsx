@@ -35,16 +35,18 @@ const Home: NextPage = () => {
           <p className={styles.p}>
             A Decentralized and Secured Way To Issue & Verify Certificates.
           </p>
-          <div>
-            {!IsOrg && (
+          <div style={{ display: "flex", width: "fit-content" }}>
+            {!IsOrg && address && (
               <button className={styles.button} onClick={HandleClick}>
                 Create Organization
               </button>
             )}
-          </div>
-
-          <div className={styles.connect}>
-            <ConnectWallet modalSize="compact" theme={btnTheme}></ConnectWallet>
+            <div className={styles.connect}>
+              <ConnectWallet
+                modalSize="compact"
+                theme={btnTheme}
+              ></ConnectWallet>
+            </div>
           </div>
         </div>
       </div>
