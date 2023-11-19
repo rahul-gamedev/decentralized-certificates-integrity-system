@@ -9,12 +9,11 @@ import { IoCloseCircle } from "react-icons/io5";
 
 const VerifyCertificate = () => {
   const router = useRouter();
-
   const hash = router.query.hashId;
 
   const { Contract, loading } = useAuthContext();
 
-  const [Loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState<boolean>();
 
   const [verified, setVerified] = useState(Boolean);
   const [result, setResult] = useState([]);
@@ -22,19 +21,21 @@ const VerifyCertificate = () => {
   const Verify = async (hash: string | string[] | undefined) => {
     setLoading(true);
     try {
-      const data = await Contract?.call("VerifyCertificate", [hash]);
-      setVerified(data[0]);
-      setResult(data[1]);
-      setLoading(false);
-      console.log(data[0]);
+      if (hash != undefined) {
+        console.log("Verifying..");
+        const data = await Contract?.call("VerifyCertificate", [hash]);
+        setVerified(data[0]);
+        setResult(data[1]);
+        setLoading(false);
+        console.log(data[0]);
+      }
     } catch (error) {
-      setLoading(false);
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (!verified) Verify(hash);
+    if (!verified && hash) Verify(hash);
   }, [hash, []]);
 
   return (
