@@ -21,7 +21,7 @@ const VerifyCertificate = () => {
 
   return (
     <div>
-      {Loading || (loading && <Loader props={"Verify"} />)}
+      {Loading || <Loader props={"Verify"} />}
 
       <div className={styles.container}>
         <Navbar></Navbar>
