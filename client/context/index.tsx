@@ -1,9 +1,4 @@
-import {
-  SmartContract,
-  useAddress,
-  useContract,
-  useSwitchAccount,
-} from "@thirdweb-dev/react";
+import { SmartContract, useAddress, useContract } from "@thirdweb-dev/react";
 import {
   ReactNode,
   createContext,

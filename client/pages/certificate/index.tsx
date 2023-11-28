@@ -91,11 +91,13 @@ const CertificateIssue = () => {
           <div className={styles.form}>
             <h1 className={styles.title}>Result</h1>
 
-            <Image
+            <img
               src={`https://api.qrserver.com/v1/create-qr-code/?data=https://dcis.vercel.app/verify/${result}&size=256x256&bgcolor=220-227-231`}
               alt=""
               title="qrcode"
-              style={{ height: "256px", width: "256px" }}
+              width={256}
+              height={256}
+              // style={{ height: "256px", width: "256px" }}
             />
             <br></br>
             <label>Hash</label>
