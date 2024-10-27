@@ -18,7 +18,7 @@ export const AuthContext = createContext<Auth | undefined>(undefined);
 
 export const AuthStateProvider = ({ children }: { children: ReactNode }) => {
   const { contract } = useContract(
-    "0xE57c3C0b215e674c2fAD9AD857b8f09D48F30D59"
+    process.env.CONTRACT_ID
   );
 
   const _address = useAddress();
